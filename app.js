@@ -5,19 +5,17 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerJsdoc = require('swagger-jsdoc');
 const authRoutes = require('./routes/authRoutes');
 const bookRoutes = require('./routes/bookRoutes');
+const createLog = require("./middlewares/loggingMiddleware.js");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(express.json());
+app.use(createLog);
 app.use(helmet());
-
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/book_management_db', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
+mongoose.connect('mongodb://localhost:27017/book_management_db');
 
 // API Routes
 app.use('/api/auth', authRoutes);

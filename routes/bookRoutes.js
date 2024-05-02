@@ -1,11 +1,11 @@
 const express = require('express');
-const { getAllBooks, createBook } = require('../controllers/bookController');
+const { getBooks, createBook, editBook, deleteBook } = require('../controllers/bookController');
 const router = express.Router();
-const authMiddleware = require('../middleware/authMiddleware');
+const authMiddleware = require('../middlewares/authMiddleware');
 
-router.get('/', getAllBooks);
+router.get('/', getBooks);
 router.post('/', authMiddleware, createBook);
-
-// Implement update and delete routes similarly
+router.put('/', authMiddleware, editBook);
+router.delete('/', authMiddleware, deleteBook);
 
 module.exports = router;
